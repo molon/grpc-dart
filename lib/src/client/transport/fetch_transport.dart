@@ -367,7 +367,7 @@ class FetchTransportStream implements GrpcTransportStream {
   }
 }
 
-class FetchClientConnection extends ClientConnection {
+class FetchClientConnection implements ClientConnection {
   final Uri uri;
 
   final _requests = <FetchTransportStream>{};
@@ -441,6 +441,11 @@ class FetchClientConnection extends ClientConnection {
 
   @override
   Future<void> shutdown() async {}
+
+  @override
+  set onStateChanged(void Function(ConnectionState) cb) {
+    // Do nothing.
+  }
 }
 
 MapEntry<String, String>? _getContentTypeHeader(Map<String, String> metadata) {
